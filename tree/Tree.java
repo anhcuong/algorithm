@@ -60,6 +60,29 @@ public class Tree {
 		System.out.println("Iter PreOrder: ");
 		iter_PreOrder(c1);
 
+		System.out.println();
+		System.out.println("Print 3 Ancestor: ");
+		ancestor(3, c1);
+		System.out.println();
+		System.out.println("Print 5 Ancestor: ");
+		ancestor(5, c1);		
+
+		System.out.println();
+		System.out.println("Print 5 Ancestor: ");
+		iter_ancestor(5, c1);
+
+		System.out.println();
+		System.out.println("Print 6 Ancestor : ");
+		ancestor(6, c1);
+
+		System.out.println();
+		System.out.println("Print 6 Ancestor c2: ");
+		ancestor(6, c2);
+
+		System.out.println();
+		System.out.println("Print 5 Ancestor c2: ");
+		iter_ancestor(5, c2);
+
 	}
 
 	static void InOrder(Node cur){
@@ -170,6 +193,55 @@ public class Tree {
 
 	static void print_top_view(Node cur){
 
+	}
+
+	static boolean ancestor(int data, Node root){
+		if (root == null)
+			return false;
+		if (root.data == data)			
+			return true;
+		boolean result = ancestor(data, root.left) || ancestor (data, root.right);
+		if (result)
+			System.out.print(root.data + " ");
+		return result;
+	}
+
+	static void iter_ancestor(int data, Node root){
+		Stack <Node> s = new Stack<Node>();
+		Node cur = root;
+		
+		while(true){
+			while(cur != null || cur.data != data){
+				//Push until see the target or reach end of branch
+				s.push(cur);
+				cur = cur.left;
+			}
+
+			//either see target or end of branch
+			
+			if (cur !=null && cur.data == data){
+				//see target
+				break;
+			}
+
+			//cur is null
+			if (!s.isEmpty()){
+				if (s.peek().right == null){
+					//left is null, now right also null, keep for what
+					s.pop();
+				}
+			} 
+
+		}
+
+		//print the result from stack
+		if (s.isEmpty()){
+			System.out.println("No item in tree");
+		}else{
+			while(!s.isEmpty()){
+				System.out.print(s.pop()+" ");
+			}
+		}
 	}
 
 }
