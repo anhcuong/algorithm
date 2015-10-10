@@ -12,6 +12,7 @@ public class Puzzle{
 		System.out.println(longest_substr_without_repeat("ABBDEFG"));
 		System.out.println("Input: ABDEFG");
 		System.out.println(longest_substr_without_repeat("ABDEFG"));
+		test_reverse();
 	}
 
 	//Given a string, find the longest substring without repeating characters
@@ -46,5 +47,11 @@ public class Puzzle{
 			max_length_so_far = Math.max(cur_len, max_length_so_far);
 		}
 		return max_length_so_far;
+	}
+
+	static void test_reverse(){
+		StringBuffer x = new StringBuffer("(A+B^C)*D+E^5");
+		x.reverse();
+		System.out.println(x);
 	}
 }
